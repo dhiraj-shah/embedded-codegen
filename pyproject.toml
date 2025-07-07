@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "embedded_codegen"
+version = "2.0.0"
+description = "Embedded code generator with LLVM IR support"
+authors = ["Dhiraj Shah <find.dhiraj@gmail.com>"]
+
+
+# Tell Poetry to install these folders as top-level packages
+packages = [
+  { include = "core" },
+  { include = "cli" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+jinja2 = "^3.1"
+pydantic = "^2.5"
+typer = {extras = ["all"], version = "^0.9"}
+rich = "^13.7"
+pyyaml = "^6.0"
+llvmlite = "^0.41.0"
+pytest = { version = "^7.0", optional = true }
+pytest-mock = { version = "^3.11", optional = true }
+
+#[tool.poetry.dev-dependencies]
+#pytest = "^7.0"
+#pytest-mock = "^3.11"
+
+[tool.poetry.group.docs.dependencies]
+sphinx = "^7.2.6"
+sphinx-autobuild = "^2024.10.2"
+
+[tool.poetry.extras]
+dev = ["pytest", "pytest-mock"]
+
+[tool.poetry.scripts]
+embedded-codegen = "cli.main:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

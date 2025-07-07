@@ -1,0 +1,15 @@
+// Auto-generated Timer init
+// Generated on {{ now.strftime("%Y-%m-%d %H:%M:%S") }}
+
+#include "config.h"
+#ifdef ENABLE_TIMER
+#include "timer.h"
+#include "hal.h"
+
+void timer_init(void) {
+{% for timer in board.timer %}
+    configure_timer("{{ timer.name }}", {{ timer.prescaler }}, {{ timer.period }});
+{% endfor %}
+}
+#endif
+

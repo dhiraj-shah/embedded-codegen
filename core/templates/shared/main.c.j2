@@ -1,0 +1,26 @@
+// Auto-generated Main Firmware Entry Point
+// Generated on {{ now.strftime("%Y-%m-%d %H:%M:%S") }}
+
+#include "hal.h"
+#include "config.h"
+
+{% for p in peripherals %}
+#ifdef ENABLE_{{ p.name }}
+#include "{{ p.header }}"
+#endif
+{% endfor %}
+
+int main(void) {
+{% for p in peripherals %}
+#ifdef ENABLE_{{ p.name }}
+    {{ p.func }};
+#endif
+{% endfor %}
+
+    while (1) {
+        // Application loop
+    }
+
+    return 0;
+}
+

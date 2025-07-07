@@ -1,0 +1,12 @@
+// Auto-generated config.h
+// Generated on {{ now.strftime("%Y-%m-%d %H:%M:%S") }}
+
+#ifndef CONFIG_H
+#define CONFIG_H
+
+{% for p in peripherals %}
+#define ENABLE_{{ p.name }}
+{% endfor %}
+
+#endif // CONFIG_H
+

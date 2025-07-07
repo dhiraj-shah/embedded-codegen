@@ -1,0 +1,33 @@
+# Auto-generated Makefile
+# Target: {{ target|upper }}
+# Generated on {{ now.strftime("%Y-%m-%d %H:%M:%S") }}
+
+CC = {% if target == "stm32" %}arm-none-eabi-gcc{% elif target == "imx7" %}arm-linux-gnueabihf-gcc{% else %}gcc{% endif %}
+
+CFLAGS = -Wall {% if target == "stm32" %}-Os -mcpu=cortex-m4 -mthumb{% elif target == "imx7" %}-O2 -march=armv7-a -mfpu=neon-vfpv4 -mfloat-abi=hard{% else %}-O2{% endif %} -Iinclude
+
+LDFLAGS = 
+
+SRC_DIR = src
+BUILD_DIR = build
+BIN_DIR = bin
+
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRCS))
+
+TARGET = $(BIN_DIR)/firmware.elf
+
+all: $(TARGET)
+
+$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c | $(BUILD_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+$(TARGET): $(OBJS) | $(BIN_DIR)
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
+
+$(BUILD_DIR) $(BIN_DIR):
+	mkdir -p $@
+
+clean:
+	rm -rf $(BUILD_DIR)/*.o $(TARGET)
+

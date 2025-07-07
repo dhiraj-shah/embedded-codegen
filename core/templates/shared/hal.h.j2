@@ -1,0 +1,12 @@
+// Auto-generated hal.h
+// Generated on {{ now.strftime("%Y-%m-%d %H:%M:%S") }}
+
+#ifndef HAL_H
+#define HAL_H
+
+void configure_pin(const char* pin, const char* mode, const char* pull, const char* speed);
+void configure_uart(const char* name, const char* tx, const char* rx, int baudrate);
+void configure_timer(const char* name, int prescaler, int period);
+
+#endif // HAL_H
+

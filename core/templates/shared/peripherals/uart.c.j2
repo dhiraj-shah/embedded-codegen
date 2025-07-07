@@ -1,0 +1,15 @@
+// Auto-generated UART init
+// Generated on {{ now.strftime("%Y-%m-%d %H:%M:%S") }}
+
+#include "config.h"
+#ifdef ENABLE_UART
+#include "uart.h"
+#include "hal.h"
+
+void uart_init(void) {
+{% for uart in board.uart %}
+    configure_uart("{{ uart.name }}", "{{ uart.tx }}", "{{ uart.rx }}", {{ uart.baudrate }});
+{% endfor %}
+}
+#endif
+

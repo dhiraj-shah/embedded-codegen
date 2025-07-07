@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv*/
+.emb_env/
+
+# Distribution / packaging
+build/
+#dist/
+*.egg-info/
+
+# Generated output
+out/
+
+# IDE/editor
+.vscode/
+.idea/
+*.swp
+
+# Sphinx docs build
+docs/_build/
+
+# Logs and misc
+*.log

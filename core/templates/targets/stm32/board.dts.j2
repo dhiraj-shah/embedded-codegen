@@ -1,0 +1,30 @@
+/dts-v1/;
+/ {
+    compatible = "st,stm32";
+    model = "{{ board.name }}";
+
+    chosen {
+        stdout-path = &uart1;
+    };
+
+    {% for gpio in board.gpio %}
+    gpio_pins_{{ gpio.pin }}: pinctrl-{{ gpio.pin }} {
+        /* mode={{ gpio.mode }}, pull={{ gpio.pull }}, speed={{ gpio.speed }} */
+    };
+    {% endfor %}
+
+    {% for uart in board.uart %}
+    &uart1 {
+        current-speed = <{{ uart.baudrate }}>;
+        pinctrl-names = "default";
+        pinctrl-0 = <&gpio_pins_{{ uart.tx }} &gpio_pins_{{ uart.rx }}>;
+    };
+    {% endfor %}
+
+    {% for timer in board.timer %}
+    &timer1 {
+        /* prescaler={{ timer.prescaler }}, period={{ timer.period }} */
+    };
+    {% endfor %}
+};
+

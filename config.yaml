@@ -1,0 +1,19 @@
+name: demo_board
+
+gpio:
+  - pin: PA0
+    mode: GPIOMode.output
+    pull: GPIOPull.up
+    speed: GPIOSpeed.high
+
+uart:
+  - name: UART1
+    tx: PA9
+    rx: PA10
+    baudrate: 115200
+
+timer:
+  - name: TIM2
+    prescaler: 7999
+    period: 1000
+

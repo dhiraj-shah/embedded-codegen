@@ -1,0 +1,18 @@
+/dts-v1/;
+/ {
+    compatible = "fsl,imx7";
+    model = "{{ board.name }}";
+
+    chosen {
+        linux,stdout-path = &uart1;
+    };
+
+    {% for uart in board.uart %}
+    &uart1 {
+        pinctrl-names = "default";
+        pinctrl-0 = <&pinctrl_uart1>;
+        current-speed = <{{ uart.baudrate }}>;
+    };
+    {% endfor %}
+};
+
